@@ -1,0 +1,12 @@
+version: '3.7'
+services:
+  app:
+    user: bun
+    image: oven/bun:1.0.4
+    restart: unless-stopped
+    working_dir: /usr/src/app
+    command: sh -c "bun install && bun start"
+    ports:
+      - '5000:5000'
+    volumes:
+      - ./:/usr/src/app
