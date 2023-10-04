@@ -1,4 +1,5 @@
 import os from 'os';
+import path from 'path';
 import type { TransformableInfo } from 'logform';
 import { addColors, createLogger, format, transports } from 'winston';
 import DatadogWinston from 'datadog-winston';
@@ -104,7 +105,7 @@ for (const transport of transportTypes) {
     case 'file':
       transportsToUse.push(
         new transports.File({
-          filename: process.env.LOG_FILE ?? 'storage/logs/app.log',
+          filename: process.env.LOG_FILE ?? path.join(import.meta.dir, '../../storage/logs/app.log'),
           format: fileFormatter,
         }),
       );
