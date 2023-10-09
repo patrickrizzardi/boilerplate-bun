@@ -12,7 +12,8 @@
     },
     "import/resolver": {
       "typescript": {}
-    }
+    },
+    "import/ignore": ["mathjs"]
   },
   "globals": {
     // Needed so Bun can be used everywhere and not throw an error in the linter
