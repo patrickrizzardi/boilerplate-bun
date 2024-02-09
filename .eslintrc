@@ -85,7 +85,7 @@
         "no-floating-decimal": "error",
         "no-implicit-coercion": ["error", { "boolean": false, "number": true, "string": true }],
         "no-implicit-globals": "error",
-        "no-inline-comments": "warn",
+        "no-inline-comments": "off",
         "no-iterator": "error",
         "no-labels": "error",
         "no-lone-blocks": "error",

@@ -7,6 +7,7 @@
     "lib": ["ESNext"],
     "skipLibCheck": true,
     "types": ["bun-types"],
+    "pretty": true,
 
     /* Bundler mode */
     "moduleResolution": "NodeNext",

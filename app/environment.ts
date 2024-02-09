@@ -30,5 +30,10 @@ declare module 'bun' {
      * This defaults to `development` if not set.
      */
     NODE_ENV?: string;
+
+    /**
+     * This defaults to port `5000` if not set.
+     */
+    PORT?: string;
   }
 }
