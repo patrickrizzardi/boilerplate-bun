@@ -450,7 +450,7 @@ export default config({
     'import/resolver': {
       typescript: {},
     },
-    // 'import/ignore': ['mathjs'],
+    'import/ignore': ['node_modules'],
   },
 
   languageOptions: {
