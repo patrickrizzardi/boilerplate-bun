@@ -1,6 +1,5 @@
-version: '3.7'
 services:
-  app:
+  api:
     user: bun
     image: oven/bun:1.0.4
     restart: unless-stopped

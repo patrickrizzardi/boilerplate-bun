@@ -1,8 +1,8 @@
 import log from 'utils/log-utils.ts';
 
 Bun.serve({
-  development: process.env.NODE_ENV !== 'production',
-  port: process.env.PORT ?? 5000,
+  development: Bun.env.NODE_ENV !== 'production',
+  port: Bun.env.PORT ?? 5000,
   fetch() {
     return Response.json({
       message: 'Hello, world!',
@@ -15,4 +15,4 @@ Bun.serve({
   },
 });
 
-log.info(`Server started on port ${process.env.PORT ?? 5000}`);
+log.info(`Server started on port ${Bun.env.PORT ?? 5000}`);
