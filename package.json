@@ -10,7 +10,9 @@
     "clean": "rm -rf dist && rm -rf storage && echo 'Done.'",
     "build": "bun build --target=bun app/index.ts --outfile=dist/index.js",
     "start": "bun --watch app/index.ts",
-    "lint": "prettier --check app && eslint . --ext .vue,.js,.jsx,.cjs,.mjs,.ts,.tsx,.cts,.mts --ignore-path .gitignore && cspell . --no-progress --unique",
+    "lint": "eslint . --fix --quiet --color --cache",
+    "lint:format": "prettier --check .",
+    "lint:spelling": "cspell . --no-progress --unique",
     "format": "prettier --write app"
   },
   "author": "Patrick Rizzardi <patrick@redact.digital> (https://redact.digital)",
