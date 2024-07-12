@@ -52,5 +52,5 @@
     "noUncheckedIndexedAccess": true,
     "strictBindCallApply": true
   },
-  "include": ["app/**/*", "*.mjs"]
+  "include": ["**/*"]
 }

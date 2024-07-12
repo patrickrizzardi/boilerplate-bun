@@ -194,7 +194,7 @@ const importRules = {
   'import/no-unused-modules': 'error',
   'import/no-amd': 'error',
   'import/no-commonjs': 'error',
-  'import/default': 'error',
+  'import/default': 'off',
   'import/named': 'error',
   'import/namespace': 'error',
   'import/no-absolute-path': 'error',
@@ -429,8 +429,7 @@ export default config({
    * will only accept file patterns. It is important to note that if the global ignore is paired with other
    * key-value pairs within an object, it will no longer be global and will only apply to that specific object.
    */
-
-  ignores: ['node_modules', 'dist'],
+  ignores: ['node_modules/*', 'dist/*'],
 
   /**
    * ESLint configurations
