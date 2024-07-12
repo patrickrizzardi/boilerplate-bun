@@ -429,8 +429,7 @@ export default config({
    * will only accept file patterns. It is important to note that if the global ignore is paired with other
    * key-value pairs within an object, it will no longer be global and will only apply to that specific object.
    */
-
-  ignores: ['node_modules', 'dist'],
+  ignores: ['node_modules/*', 'dist/*'],
 
   /**
    * ESLint configurations
@@ -451,7 +450,7 @@ export default config({
     'import/resolver': {
       typescript: {},
     },
-    // 'import/ignore': ['mathjs'],
+    'import/ignore': ['node_modules'],
   },
 
   languageOptions: {
