@@ -6,7 +6,7 @@
     "module": "NodeNext",
     "lib": ["ESNext"],
     "skipLibCheck": true,
-    "types": ["bun-types"],
+    "types": ["bun-types", "node"],
     "pretty": true,
 
     /* Bundler mode */
@@ -24,8 +24,8 @@
     "baseUrl": ".",
     "paths": {
       "utils/*": ["./app/utils/*"],
-      "config/*": ["./app/config/*"],
-      "root/*": ["./app/*"]
+      "root/*": ["./app/*"],
+      "userServices/*": ["./app/services/user/*"]
     },
     "sourceMap": false,
     "removeComments": true,
@@ -50,7 +50,8 @@
     "allowUnusedLabels": false,
     "exactOptionalPropertyTypes": true,
     "noUncheckedIndexedAccess": true,
-    "strictBindCallApply": true
+    "strictBindCallApply": true,
+    "experimentalDecorators": true
   },
   "include": ["**/*"]
 }

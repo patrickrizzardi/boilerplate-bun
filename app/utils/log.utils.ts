@@ -8,14 +8,14 @@ import DatadogWinston from 'datadog-winston';
  * Logging levels in winston conform to the severity ordering specified by RFC5424: severity of all levels is assumed to
  *  be numerically ascending from most important to least important.
  */
-enum LogLevels {
+const enum LogLevels {
   CRITICAL = 0,
   ERROR = 1,
   WARN = 2,
   INFO = 3,
 }
 
-enum LogColors {
+const enum LogColors {
   CRITICAL = 'bold white redBG',
   ERROR = 'bold red',
   WARN = 'bold yellow',

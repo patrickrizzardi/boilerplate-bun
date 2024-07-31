@@ -210,7 +210,7 @@ const importRules = {
     },
   ],
   'import/first': 'error',
-  'import/group-exports': 'error',
+  'import/group-exports': 'off',
   'import/newline-after-import': 'error',
   'import/no-duplicates': 'error',
   'import/order': 'error',

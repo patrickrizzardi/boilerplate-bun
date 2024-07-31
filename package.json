@@ -9,34 +9,37 @@
     "test:production": "bun test --timeout 20 --rerun-each 10 --bail 10",
     "clean": "rm -rf dist && rm -rf storage && echo 'Done.'",
     "build": "bun build --target=bun app/index.ts --outfile=dist/index.js",
-    "start": "bun --watch app/index.ts",
     "lint": "eslint . --fix --quiet --color --cache",
     "lint:format": "prettier --check .",
     "lint:spelling": "cspell . --no-progress --unique",
-    "format": "prettier --write app"
+    "format": "prettier --write app",
+    "update": "npm-check-updates -i"
   },
   "author": "Patrick Rizzardi <patrick@redact.digital> (https://redact.digital)",
   "dependencies": {
-    "datadog-winston": "^1.5.1",
-    "dayjs": "^1.11.9",
-    "mathjs": "^11.9.1",
-    "winston": "^3.10.0"
+    "@elysiajs/cors": "^1.1.0",
+    "@elysiajs/jwt": "^1.1.0",
+    "@sequelize/core": "^7.0.0-alpha.37",
+    "@sequelize/mysql": "^7.0.0-alpha.41",
+    "datadog-winston": "^1.6.0",
+    "dayjs": "^1.11.12",
+    "elysia": "^1.1.4",
+    "mathjs": "13.0.3",
+    "winston": "^3.13.1"
   },
   "devDependencies": {
     "@eslint/compat": "^1.1.1",
-    "@types/datadog-winston": "^1.0.5",
-    "bun-types": "^1.1.10",
-    "cspell": "^6.31.2",
-    "eslint": "^9.6.0",
+    "@types/datadog-winston": "^1.0.7",
+    "bun-types": "^1.1.20",
+    "cspell": "^8.12.1",
+    "eslint": "^9.7.0",
     "eslint-import-resolver-typescript": "^3.6.1",
     "eslint-plugin-import": "^2.29.1",
     "globals": "^15.8.0",
-    "logform": "^2.5.1",
-    "prettier": "^3.0.0",
-    "typescript": "^5.1.6",
-    "typescript-eslint": "^7.16.0"
-  },
-  "peerDependencies": {
-    "typescript": "^5.0.0"
+    "logform": "^2.6.1",
+    "npm-check-updates": "^16.14.20",
+    "prettier": "^3.3.3",
+    "typescript": "^5.5.4",
+    "typescript-eslint": "^7.17.0"
   }
 }
