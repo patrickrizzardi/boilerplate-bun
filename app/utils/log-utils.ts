@@ -64,7 +64,7 @@ const formatter = format.combine(
       message = `${message} \n${JSON.stringify(meta, null, 2)}`;
     }
 
-    return `${timestamp} [${level}]: ${message}`;
+    return `${<string>timestamp} [${level}]: ${message}`;
   }),
 );
 
@@ -86,7 +86,7 @@ const fileFormatter = format.combine(
       message = `${message} \n${JSON.stringify(meta, null, 2)}`;
     }
 
-    return `${timestamp} [${level}]: ${message}`;
+    return `${<string>timestamp} [${level}]: ${message}`;
   }),
 );
 

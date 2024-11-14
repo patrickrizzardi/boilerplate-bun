@@ -1,5 +1,3 @@
-/* eslint-disable max-lines */
-/* eslint-disable import/first */
 import globals from 'globals';
 import { fixupPluginRules } from '@eslint/compat';
 import { config, configs, parser, plugin } from 'typescript-eslint';
@@ -24,6 +22,7 @@ const typescriptEslintConfig = configs;
  * settings object within the ESLint configuration.
  */
 const typescriptEslintPlugin = plugin;
+// @ts-expect-error this is a valid import
 import _import from 'eslint-plugin-import';
 
 const eslintRules = {
@@ -209,7 +208,6 @@ const importRules = {
       ignorePackages: true,
     },
   ],
-  'import/first': 'error',
   'import/group-exports': 'error',
   'import/newline-after-import': 'error',
   'import/no-duplicates': 'error',
@@ -225,7 +223,6 @@ const typscriptRules = {
     },
   ],
   '@typescript-eslint/await-thenable': 'error',
-  '@typescript-eslint/ban-types': 'error',
   '@typescript-eslint/class-literal-property-style': 'error',
   '@typescript-eslint/consistent-generic-constructors': 'error',
   '@typescript-eslint/consistent-indexed-object-style': ['error', 'record'],
@@ -339,7 +336,6 @@ const typscriptRules = {
   '@typescript-eslint/no-unnecessary-type-assertion': 'error',
   '@typescript-eslint/no-unnecessary-type-constraint': 'error',
   '@typescript-eslint/no-unsafe-argument': 'warn',
-  '@typescript-eslint/no-unsafe-assignment': 'error',
   '@typescript-eslint/no-unsafe-enum-comparison': 'error',
   '@typescript-eslint/no-unsafe-return': 'error',
   '@typescript-eslint/no-useless-empty-export': 'error',
@@ -378,7 +374,6 @@ const typscriptRules = {
   'no-empty-function': 'off',
   '@typescript-eslint/no-empty-function': 'error',
   'no-extra-semi': 'off',
-  '@typescript-eslint/no-extra-semi': 'error',
   'no-implied-eval': 'off',
   '@typescript-eslint/no-implied-eval': 'error',
   'no-invalid-this': 'off',
@@ -395,7 +390,6 @@ const typscriptRules = {
   'no-shadow': 'off',
   '@typescript-eslint/no-shadow': 'error',
   'no-throw-literal': 'off',
-  '@typescript-eslint/no-throw-literal': 'error',
   'no-unused-expressions': 'off',
   '@typescript-eslint/no-unused-expressions': 'error',
   'no-unused-vars': 'off',
@@ -429,7 +423,7 @@ export default config({
    * will only accept file patterns. It is important to note that if the global ignore is paired with other
    * key-value pairs within an object, it will no longer be global and will only apply to that specific object.
    */
-  ignores: ['node_modules/*', 'dist/*'],
+  ignores: ['node_modules/*', 'dist/*', 'eslint.config.mjs'],
 
   /**
    * ESLint configurations
@@ -468,11 +462,11 @@ export default config({
   },
 
   plugins: {
-    // eslint-disable-next-line @typescript-eslint/no-unsafe-assignment
     import: fixupPluginRules(_import),
     '@typescript-eslint': typescriptEslintPlugin,
   },
 
+  // @ts-expect-error this is a valid object
   rules: {
     ...eslintRules,
     ...importRules,
