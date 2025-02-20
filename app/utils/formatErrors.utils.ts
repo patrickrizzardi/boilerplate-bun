@@ -1,4 +1,5 @@
 import type { Context } from 'elysia';
+
 import type { IErrorResponse } from 'root/Elysia.typedefs.ts';
 import { EStatusCode } from 'root/Elysia.typedefs.ts';
 
@@ -24,7 +25,7 @@ export default (errors: any, statusCode?: { set: Context['set']; status: EStatus
   }
 
   if (typeof errors === 'string' || Array.isArray(errors)) {
-    let errorsArray = <Array<string>>errors;
+    let errorsArray = errors as Array<string>;
     if (typeof errors === 'string') errorsArray = [errors];
 
     for (const error of errorsArray) {

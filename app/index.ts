@@ -1,11 +1,12 @@
+import { cors } from '@elysiajs/cors';
 import { jwt } from '@elysiajs/jwt';
 import type { JWTPayloadSpec } from '@elysiajs/jwt';
 import { Elysia } from 'elysia';
 import type { Context } from 'elysia';
-import { cors } from '@elysiajs/cors';
+
+import { userDatabase } from 'root/services/user/models/sequelize.ts';
 import formatErrorsUtils from 'utils/formatErrors.utils.ts';
 import log from 'utils/log.utils.ts';
-import { userDatabase } from 'root/services/user/models/sequelize.ts';
 
 export interface BunContext extends Context {
   userId: string;
@@ -31,13 +32,6 @@ export const createApp = (): Elysia => {
     .onError(({ error, set }: { error: any; set: Context['set'] }) => {
       log.error('Error', error);
       return formatErrorsUtils(error, { set, status: 500 });
-    })
-
-    .onBeforeHandle((ctx) => {
-      /**
-       * If the body is empty, set it to an empty object elysia parsing errors
-       */
-      if (!ctx.body) ctx.body = {};
     })
 
     .use(
@@ -91,10 +85,7 @@ export const createApp = (): Elysia => {
         audience: Bun.env.APP_URL,
         alg: 'ES256',
       }),
-    )
-
-    .get('/status', () => ({ success: true }));
-  // .group(<''>'/auth', <any>authRoutes)
+    );
 
   return app;
 };

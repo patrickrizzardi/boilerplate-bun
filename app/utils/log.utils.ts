@@ -1,8 +1,9 @@
 import os from 'os';
 import path from 'path';
+
+import DatadogWinston from 'datadog-winston';
 import type { TransformableInfo } from 'logform';
 import { addColors, createLogger, format, transports } from 'winston';
-import DatadogWinston from 'datadog-winston';
 
 /**
  * Logging levels in winston conform to the severity ordering specified by RFC5424: severity of all levels is assumed to
@@ -57,7 +58,7 @@ const formatter = format.combine(
   /** Format the way the log is output to the console */
   format.printf((info: TransformableInfo) => {
     const { timestamp, level, ...meta } = info;
-    let { message } = <{ message: string }>info;
+    let { message } = info as { message: string };
 
     if (Object.keys(meta).length > 1) {
       delete meta.message;
@@ -79,7 +80,7 @@ const fileFormatter = format.combine(
   /** Format the way the log is output to the console */
   format.printf((info: TransformableInfo) => {
     const { timestamp, level, ...meta } = info;
-    let { message } = <{ message: string }>info;
+    let { message } = info as { message: string };
 
     if (Object.keys(meta).length > 1) {
       delete meta.message;

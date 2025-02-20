@@ -1,12 +1,12 @@
 import type { Elysia } from 'elysia';
 
-import getUserHandler from 'root/services/user/handlers/getUser.handler.ts';
+import registerUserHandler from 'root/services/user/handlers/registerUser.handler.ts';
 
 export default (app: Elysia): unknown => {
   /**
    * Get the user saved in the context object
    */
-  app.get('/get', getUserHandler);
+  app.post('/register', registerUserHandler);
 
   return app;
 };

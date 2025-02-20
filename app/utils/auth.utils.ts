@@ -1,5 +1,6 @@
 import type { JWTPayloadSpec } from '@elysiajs/jwt';
 import type { Context } from 'elysia';
+
 import type { THttpResponse } from 'root/Elysia.typedefs.ts';
 import formatErrorsUtils from 'utils/formatErrors.utils.ts';
 
@@ -8,7 +9,7 @@ import formatErrorsUtils from 'utils/formatErrors.utils.ts';
  * This is so that the next middleware can run. If we return anything other than void or undefined, the next middleware will not run.
  */
 export default async (ctx: Context): Promise<THttpResponse<undefined> | undefined> => {
-  const { accessJwt, headers } = <Context & { accessJwt: { verify: (token: string) => Promise<JWTPayloadSpec | false> } }>ctx;
+  const { accessJwt, headers } = ctx as Context & { accessJwt: { verify: (token: string) => Promise<JWTPayloadSpec | false> } };
 
   if (!headers.authorization) return formatErrorsUtils('No token provided', { set: ctx.set, status: 401 });
   const [, token] = headers.authorization.split(' ');
