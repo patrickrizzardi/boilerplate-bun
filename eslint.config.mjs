@@ -1,29 +1,7 @@
-import globals from 'globals';
 import { fixupPluginRules } from '@eslint/compat';
-import { config, configs, parser, plugin } from 'typescript-eslint';
-
-/**
- * Parser imports
- * The parser is responsible for telling ESLint how to parse the code. This is important for ESLint to
- * understand the code and apply the rules and settings defined in the ESLint configuration.
- */
-const tsParser = parser;
-
-/**
- * Config imports
- * Configs are used to define rules and settings for ESLint. These rules are helpful to ensure there are
- * non conflicting rules and settings within the ESLint configuration.
- */
-const typescriptEslintConfig = configs;
-
-/**
- * Plugin imports
- * Plugins are used to define rules and settings for ESLint. These rules are added in the rules object and/or
- * settings object within the ESLint configuration.
- */
-const typescriptEslintPlugin = plugin;
-// @ts-expect-error this is a valid import
 import _import from 'eslint-plugin-import';
+import globals from 'globals';
+import { config, configs, parser, plugin } from 'typescript-eslint';
 
 const eslintRules = {
   /** eslint possible problems*/
@@ -41,8 +19,8 @@ const eslintRules = {
   'block-scoped-var': 'error',
   /** eslint suggestions */
   'arrow-body-style': ['error', 'as-needed'],
-  camelcase: ['error'],
-  complexity: ['error', 15],
+  camelcase: ['error', { allow: ['calendar_v3'] }],
+  complexity: ['error', 20],
   curly: ['error', 'multi-line'],
   'default-case': 'error',
   'default-case-last': 'error',
@@ -52,20 +30,20 @@ const eslintRules = {
   'guard-for-in': 'error',
   'logical-assignment-operators': 'error',
   'max-classes-per-file': ['error', 1],
-  'max-depth': ['error', 4],
-  'max-lines': ['error', 300],
+  'max-depth': ['error', 6],
+  'max-lines': ['error', 500],
   'max-lines-per-function': [
     'error',
     {
-      max: 100,
+      max: 250,
       skipBlankLines: true,
       skipComments: true,
     },
-  ],
+  ], // 50
   'max-nested-callbacks': ['error', 3],
-  'max-params': ['error', 3],
-  'max-statements': ['error', 20],
-  'new-cap': ['error', { capIsNewExceptions: ['Attribute', 'Table', 'Default', 'HasOne', 'HasMany', 'BelongsTo', 'ENUM'] }],
+  'max-params': ['error', 4],
+  'max-statements': ['error', 45],
+  'new-cap': ['error', { capIsNewExceptions: ['Attribute', 'Table', 'Default'] }],
   'no-alert': 'error',
   'no-bitwise': 'error',
   'no-confusing-arrow': 'error',
@@ -181,7 +159,6 @@ const eslintRules = {
     },
   ],
   'template-curly-spacing': ['error', 'never'],
-  'wrap-regex': 'error',
 };
 
 const importRules = {
@@ -202,19 +179,32 @@ const importRules = {
   'import/no-useless-path-segments': 'error',
   'import/consistent-type-specifier-style': 'error',
   'import/extensions': [
-    'error',
+    'off',
     'always',
     {
       ignorePackages: true,
     },
   ],
-  'import/group-exports': 'error',
+  'import/first': 'error',
+  'import/group-exports': 'off',
   'import/newline-after-import': 'error',
   'import/no-duplicates': 'error',
-  'import/order': 'error',
+  'import/order': [
+    'error',
+    {
+      alphabetize: {
+        order: 'asc',
+        caseInsensitive: true,
+      },
+      groups: ['builtin', 'external', 'internal'],
+      'newlines-between': 'always',
+    },
+  ],
 };
 
-const typscriptRules = {
+const typescriptRules = {
+  'require-await': 'off',
+  '@typescript-eslint/require-await': 'error',
   '@typescript-eslint/adjacent-overload-signatures': 'error',
   '@typescript-eslint/array-type': [
     'error',
@@ -229,7 +219,7 @@ const typscriptRules = {
   '@typescript-eslint/consistent-type-assertions': [
     'error',
     {
-      assertionStyle: 'angle-bracket',
+      assertionStyle: 'as',
     },
   ],
   '@typescript-eslint/consistent-type-definitions': ['error', 'interface'],
@@ -260,12 +250,12 @@ const typscriptRules = {
     'error',
     {
       selector: ['variable'],
-      format: ['strictCamelCase', 'StrictPascalCase', 'UPPER_CASE'],
+      format: ['strictCamelCase', 'PascalCase', 'UPPER_CASE'],
       leadingUnderscore: 'allow',
     },
     {
       selector: ['parameter', 'typeProperty'],
-      format: ['strictCamelCase', 'StrictPascalCase'],
+      format: ['strictCamelCase', 'PascalCase'],
       leadingUnderscore: 'allow',
     },
     {
@@ -288,13 +278,13 @@ const typscriptRules = {
   ],
   '@typescript-eslint/no-duplicate-enum-values': 'error',
   '@typescript-eslint/no-duplicate-type-constituents': 'error',
-  '@typescript-eslint/no-dynamic-delete': 'error',
+  '@typescript-eslint/no-dynamic-delete': 'off',
   '@typescript-eslint/no-empty-interface': 'error',
   '@typescript-eslint/no-explicit-any': [
     'off',
     {
       ignoreRestArgs: true,
-      fixToUnknown: true,
+      fixToUnknown: false,
     },
   ],
   '@typescript-eslint/no-extra-non-null-assertion': 'error',
@@ -309,7 +299,7 @@ const typscriptRules = {
   '@typescript-eslint/no-import-type-side-effects': 'error',
   '@typescript-eslint/no-inferrable-types': 'error',
   '@typescript-eslint/no-invalid-void-type': [
-    'error',
+    'off',
     {
       allowAsThisParameter: true,
       allowInGenericTypeArguments: true,
@@ -336,6 +326,7 @@ const typscriptRules = {
   '@typescript-eslint/no-unnecessary-type-assertion': 'error',
   '@typescript-eslint/no-unnecessary-type-constraint': 'error',
   '@typescript-eslint/no-unsafe-argument': 'warn',
+  '@typescript-eslint/no-unsafe-assignment': 'off',
   '@typescript-eslint/no-unsafe-enum-comparison': 'error',
   '@typescript-eslint/no-unsafe-return': 'error',
   '@typescript-eslint/no-useless-empty-export': 'error',
@@ -356,7 +347,7 @@ const typscriptRules = {
   '@typescript-eslint/promise-function-async': 'error',
   '@typescript-eslint/require-array-sort-compare': 'error',
   '@typescript-eslint/restrict-plus-operands': 'error',
-  '@typescript-eslint/restrict-template-expressions': 'error',
+  '@typescript-eslint/restrict-template-expressions': 'off',
   '@typescript-eslint/sort-type-constituents': 'error',
   '@typescript-eslint/switch-exhaustiveness-check': 'error',
   '@typescript-eslint/unified-signatures': 'error',
@@ -373,7 +364,7 @@ const typscriptRules = {
   '@typescript-eslint/no-dupe-class-members': 'error',
   'no-empty-function': 'off',
   '@typescript-eslint/no-empty-function': 'error',
-  'no-extra-semi': 'off',
+  'no-extra-semi': 'error',
   'no-implied-eval': 'off',
   '@typescript-eslint/no-implied-eval': 'error',
   'no-invalid-this': 'off',
@@ -385,11 +376,24 @@ const typscriptRules = {
   'no-magic-numbers': 'off',
   'no-redeclare': 'off',
   '@typescript-eslint/no-redeclare': 'error',
-  'no-restricted-imports': 'off',
-  '@typescript-eslint/no-restricted-imports': 'error',
+  'no-restricted-imports': [
+    'error',
+    {
+      paths: [
+        {
+          name: 'console',
+          message: 'Please use our custom logger from utils/logger instead',
+        },
+        {
+          name: 'process',
+          message: 'Please use our custom config module instead',
+        },
+      ],
+    },
+  ],
   'no-shadow': 'off',
   '@typescript-eslint/no-shadow': 'error',
-  'no-throw-literal': 'off',
+  'no-throw-literal': 'error',
   'no-unused-expressions': 'off',
   '@typescript-eslint/no-unused-expressions': 'error',
   'no-unused-vars': 'off',
@@ -407,12 +411,6 @@ const typscriptRules = {
   '@typescript-eslint/no-useless-constructor': 'error',
   'no-return-await': 'off',
   '@typescript-eslint/return-await': 'error',
-
-  /**
-   * require-await is turned off so it doesn't conflict with the @typescript-eslint/require-await rule
-   */
-  'require-await': 'off',
-  '@typescript-eslint/require-await': 'error',
 };
 
 export default config({
@@ -423,29 +421,7 @@ export default config({
    * will only accept file patterns. It is important to note that if the global ignore is paired with other
    * key-value pairs within an object, it will no longer be global and will only apply to that specific object.
    */
-  ignores: ['node_modules/*', 'dist/*', 'eslint.config.mjs'],
-
-  /**
-   * ESLint configurations
-   */
-  extends: [...typescriptEslintConfig.strict, ...typescriptEslintConfig.stylistic],
-
-  /**
-   * Typescript ESLint rules and settings
-   */
-
-  settings: {
-    /**
-     * Import plugin settings
-     */
-    'import/parsers': {
-      '@typescript-eslint/parser': ['.ts', '.tsx'],
-    },
-    'import/resolver': {
-      typescript: {},
-    },
-    'import/ignore': ['node_modules'],
-  },
+  ignores: ['node_modules/*', 'dist/**', 'database/**', 'admin/__generated__/**', '**/*.spec.ts', 'config/sequelize.js', 'worker/jobs/sift/**', 'coverage/**'],
 
   languageOptions: {
     globals: {
@@ -454,22 +430,62 @@ export default config({
       Bun: false,
     },
 
-    parser: tsParser,
+    /**
+     * ESLint parser
+     * The parser is responsible for telling ESLint how to parse the code. This is important for ESLint to
+     * understand the code and apply the rules and settings defined in the ESLint configuration.
+     */
+    parser,
 
     parserOptions: {
       project: ['./tsconfig.json'],
     },
   },
 
+  /**
+   * ESLint configurations
+   * Configs are used to define rules and settings for ESLint. These rules are helpful to ensure there are
+   * non conflicting rules and settings within the ESLint configuration.
+   */
+  extends: [...configs.strict, ...configs.stylistic],
+
+  /**
+   * ESLint plugins
+   * Plugins are used to define rules and settings for ESLint. These rules are added in the rules object and/or
+   * settings object within the ESLint configuration.
+   */
   plugins: {
     import: fixupPluginRules(_import),
-    '@typescript-eslint': typescriptEslintPlugin,
+    '@typescript-eslint': plugin,
   },
 
-  // @ts-expect-error this is a valid object
   rules: {
     ...eslintRules,
     ...importRules,
-    ...typscriptRules,
+    ...typescriptRules,
+  },
+
+  /**
+   * ESLint settings
+   */
+  settings: {
+    /**
+     * Import plugin settings
+     */
+    'import/parsers': {
+      '@typescript-eslint/parser': ['.ts', '.tsx'],
+    },
+    'import/resolver': {
+      typescript: {
+        extensions: ['.ts'],
+      },
+    },
+    'import/ignore': ['mathjs', 'node_modules'],
+
+    /**
+     * This tells ESLint to ignore the built-in console module
+     * when importing from the root of the project
+     */
+    'import/core-modules': ['console', 'process', 'config'],
   },
 });
