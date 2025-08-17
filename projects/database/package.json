@@ -1,0 +1,14 @@
+{
+  "name": "database",
+  "author": "Patrick Rizzardi <patrick@redact.digital> (https://redact.digital)",
+  "private": true,
+  "type": "module",
+  "scripts": {
+    "migrate": "bun run umzug/migrate.ts"
+  },
+  "dependencies": {},
+  "devDependencies": {
+    "umzug": "^3.8.2",
+    "ajv": "^8.17.1"
+  }
+}

@@ -1,0 +1,28 @@
+{
+  /* Extend the base configuration */
+  "extends": "../../tsconfig.base.json",
+
+  "compilerOptions": {
+    /* Build Configuration */
+    "outDir": "../../dist", // Output directory for compiled files
+    "rootDir": "../..", // Root directory of source files (workspace root)
+    "baseUrl": "../..", // Base directory to resolve non-relative module names
+
+    /* Module Resolution */
+    "paths": {
+      "@app/*": ["src/*"],
+      "@assets/*": ["assets/*"],
+      "@config/*": ["projects/config/*"]
+    }
+  },
+
+  /* Files to Include on compile */
+  "include": [
+    "index.html",
+    "src/**/*.{vue,ts,tsx}",
+    "vite.config.ts",
+    "tailwind.config.ts",
+    "postcss.config.cjs",
+    "config/base.config.ts"
+  ]
+}

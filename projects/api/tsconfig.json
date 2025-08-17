@@ -1,0 +1,20 @@
+{
+  /* Extend the base configuration */
+  "extends": "../../tsconfig.base.json",
+
+  "compilerOptions": {
+    /* Build Configuration */
+    "outDir": "../../dist", // Output directory for compiled files
+    "rootDir": "../..", // Root directory of source files (workspace root)
+    "baseUrl": "../..", // Base directory to resolve non-relative module names
+
+    /* Module Resolution */
+    "paths": {
+      "@api/*": ["projects/api/*"],
+      "@config/*": ["projects/config/*"]
+    }
+  },
+
+  /* Files to Include on compile */
+  "include": ["index.ts", "utils/temp.ts", "config/base.config.ts"]
+}

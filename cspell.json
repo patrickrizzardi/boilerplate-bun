@@ -20,14 +20,7 @@
   // language - current active spelling language
   "language": "en",
   // words - list of words to be always considered correct
-  "words": [
-    "ddsource",
-    "ddtags",
-    "lockb",
-    "rizzardi",
-    "valibot",
-    "yinzerflow"
-  ],
+  "words": ["ddsource", "ddtags", "lockb", "Promisable", "rizzardi", "valibot", "yinzerflow"],
   /**
    * flagWords - list of words to be always considered incorrect
    * This is useful for offensive words and common spelling errors.
@@ -42,9 +35,7 @@
    * We are using the --gitignore flag so this is not needed we
    * only need to ignore stuff not in gitignore
    */
-  "ignorePaths": [
-    "bun.lockb"
-  ],
+  "ignorePaths": ["bun.lockb", "*.spec.ts", "cspell.json"],
   /**
    * useGitignore - use .gitignore file(s) to exclude files and folders
    */
